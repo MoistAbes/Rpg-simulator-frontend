@@ -6,16 +6,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedIn()">
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>
-        <li class="nav-item">
+
+        <!-- Show Login and Register links only if the user is not logged in -->
+        <li class="nav-item" *ngIf="!isLoggedIn()">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isLoggedIn()">
           <a class="nav-link" routerLink="/register">Register</a>
         </li>
+
       </ul>
+      <!-- Create a new ul for the right-side elements -->
+      <ul class="navbar-nav ms-auto"> <!-- Use 'ms-auto' to align items to the right -->
+        <!-- Show Welcome message and Logout link only if the user is logged in -->
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link">Welcome, {{ userInfo?.username }}</a> <!-- Display user's name -->
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" (click)="logout()">Logout</a> <!-- Call logout method on click -->
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>

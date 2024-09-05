@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import {API_ENDPOINTS} from "../endpoints/api-endpoints";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {CharacterModel} from "../models/character.model";
 
 @Injectable({
@@ -9,17 +6,30 @@ import {CharacterModel} from "../models/character.model";
 })
 export class CharacterService {
 
-  private apiUrl = API_ENDPOINTS.BASE_URL; // Use the base URL from the config
+  private character: CharacterModel | null = null;
 
-
-  constructor(private http: HttpClient) { }
-
-  public getAllCharacters(userId: number): Observable<CharacterModel[]> {
-    return this.http.get<CharacterModel[]>(`${this.apiUrl}${API_ENDPOINTS.CHARACTER.GET_ALL(userId)}`)
+  constructor() {
+    this.loadCharacterFromLocalStorage();
   }
 
-  public createCharacter(username: string,userId: number): Observable<CharacterModel> {
-    return this.http.get<CharacterModel>(`${this.apiUrl}${API_ENDPOINTS.CHARACTER.CREATE(username ,userId)}`)
+  setCharacter(character: CharacterModel): void {
+    this.character = character;
+    localStorage.setItem('character', JSON.stringify(character)); // Save to local storage
   }
 
+  getCharacter(): CharacterModel | null {
+    return this.character;
+  }
+
+  private loadCharacterFromLocalStorage(): void {
+    const characterJson = localStorage.getItem("character")
+    if (characterJson){
+      this.character = JSON.parse(characterJson);
+    }
+  }
+
+  cleanCharacter(): void {
+    this.character = null;
+    localStorage.removeItem("character");
+  }
 }

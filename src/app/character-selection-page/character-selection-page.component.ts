@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CharacterModel} from "../models/character.model";
-import {CharacterService} from "../service/character.service";
+import {CharacterApiService} from "../service/character.api.service";
 import {UserService} from "../service/user.service";
 import {userModel} from "../models/user.model";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {CharacterService} from "../service/character.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-character-selection-page',
@@ -25,11 +28,15 @@ export class CharacterSelectionPageComponent implements OnInit{
 
 
   characterList: CharacterModel[] = [];
-  user: userModel | null
+  characterName: string = '';
 
-  constructor(private characterService: CharacterService,
-              private userService: UserService) {
-    this.user = this.userService.getUser();
+  user: userModel | undefined;
+
+  constructor(private characterApiService: CharacterApiService,
+              private authService: AuthService,
+              private characterService: CharacterService,
+              private router: Router) {
+    this.user = this.authService.getUserInfo();
   }
 
 
@@ -41,7 +48,7 @@ export class CharacterSelectionPageComponent implements OnInit{
 
     console.log("Loading characters");
 
-    this.characterService.getAllCharacters(this.user?.id!).subscribe({
+    this.characterApiService.getAllCharacters(this.user!.id).subscribe({
       next: (characters) => {
         this.characterList = characters;
       },
@@ -51,6 +58,7 @@ export class CharacterSelectionPageComponent implements OnInit{
       complete: () => {
         console.log("Succesfully loaded characters");
         console.log("Characters");
+        console.log(this.characterList)
       }
     })
   }
@@ -58,7 +66,7 @@ export class CharacterSelectionPageComponent implements OnInit{
   createCharacter() {
     console.log("Creating new character");
 
-    this.characterService.createCharacter("zymixon" ,this.user?.id!).subscribe({
+    this.characterApiService.createCharacter(this.characterName ,this.user?.id!).subscribe({
       next: (character) => {
         console.log("Created character: ", character)
         this.characterList.push(character);
@@ -72,10 +80,18 @@ export class CharacterSelectionPageComponent implements OnInit{
     })
   }
 
-  createButtonClicked() {
-    this.isCreateButtonClicked = true;
-  }
-  closeModal() {
-    this.isCreateButtonClicked = false;
+  playButtonClicked(character: CharacterModel) {
+    //move to dashboard
+    // Use navigate with then() to handle navigation success
+    this.characterService.setCharacter(character);
+
+    this.router.navigate(["/character-dashboard"]).then(success => {
+      if (success) {
+        console.log("Navigation successful to /character-dashboard");
+      } else {
+        console.log("Navigation failed");
+      }
+    });
+
   }
 }

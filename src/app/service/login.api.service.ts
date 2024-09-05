@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginApiService {
 
   private apiUrl = API_ENDPOINTS.BASE_URL; // Use the base URL from the config
 

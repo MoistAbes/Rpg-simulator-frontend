@@ -1,3 +1,5 @@
+
+
 <div class="container d-flex flex-column  justify-content-center align-items-center vh-100">
   <h1 class="mb-4">Character selection</h1> <!-- Add margin bottom for spacing -->
   <div *ngFor="let character of characterList" class="card" style="width: 18rem; margin-bottom: 20px;">
@@ -5,33 +7,44 @@
       <h5 class="card-title">{{ character.name }}</h5> <!-- Use character properties here -->
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ character.level }}</li> <!-- Example item -->
-      <li class="list-group-item">{{ character.experience }}</li> <!-- Example item -->
+      <li class="list-group-item">Level: {{ character.level }}</li> <!-- Example item -->
+      <li class="list-group-item">Experience: {{ character.experience }}</li> <!-- Example item -->
     </ul>
     <div class="card-body">
-      <button class="btn btn-success">Play</button>
+      <button (click)="playButtonClicked(character)" class="btn btn-success">Play</button>
       <button class="btn btn-warning">Delete</button>
     </div>
 </div>
-  <button (click)="createButtonClicked()" class="btn btn-success">Create new</button>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Create new
+  </button>
 
-  <div class="modal fade" [ngClass]="{'show': isCreateButtonClicked}" tabindex="-1" [style.display]="isCreateButtonClicked ? 'block' : 'none'">
-    <div class="modal-dialog">
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+          <h1 class="modal-title text-center fs-5" id="staticBackdropLabel">Character creation</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name</label>
+              <input [(ngModel)]="characterName" name="characterName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="d-flex">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button (click)="createCharacter()" data-bs-dismiss="modal" type="submit" class="btn btn-success ms-auto">Create</button>
+            </div>
+          </form>
+
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
       </div>
     </div>
   </div>
-
 
 </div>

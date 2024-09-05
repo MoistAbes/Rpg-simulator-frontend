@@ -1,0 +1,22 @@
+<!-- Sidebar -->
+<div *ngIf="isLoggedIn()" class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="sidebarLabel">Sidebar Title</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/home">Equipment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/character-stats">Statistics</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Toggle Button -->
+<button *ngIf="isLoggedIn()" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+  Toggle Sidebar
+</button>

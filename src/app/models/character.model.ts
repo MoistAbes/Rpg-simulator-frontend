@@ -1,4 +1,6 @@
 import {userModel} from "./user.model";
+import {CharacterStatsModel} from "./character-stats.model";
+import {CharacterStorageModel} from "./character-storage-model";
 
 export interface CharacterModel {
   id: number,
@@ -6,11 +8,7 @@ export interface CharacterModel {
   level: number,
   experience: number,
 
-  health: number,
-  attack: number,
-  defence: number,
-  speed: number,
-  luck: number,
-
+  storage: CharacterStorageModel[];
+  stats: CharacterStatsModel
   user: userModel
 }
