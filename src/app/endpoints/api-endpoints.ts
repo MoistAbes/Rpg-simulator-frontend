@@ -5,7 +5,8 @@ export const API_ENDPOINTS = {
   },
   CHARACTER: {
     GET_ALL: (userId: number) => `character/find-all/${userId}`,
-    CREATE: (characterName: string ,userId: number) => `character/create/${characterName}/${userId}`
+    CREATE: (characterName: string ,userId: number) => `character/create/${characterName}/${userId}`,
+    UPDATE: `character/update`
   }
 
 }

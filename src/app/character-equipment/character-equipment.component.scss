@@ -1,0 +1,48 @@
+.square {
+  width: 100%;
+  padding-bottom: 100%; /* Maintain square shape */
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  position: relative;
+}
+
+.square-content {
+  position: absolute; /* Keep this to ensure the content doesn't affect the shape */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.square-content p {
+  margin: 0; /* Remove any default margins */
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.item-quantity-text {
+  font-weight: bold;
+}
+
+
+/* External item details div */
+.item-details-external {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000; /* Ensures it's always above other elements */
+  pointer-events: none; /* Prevents it from interfering with mouse events */
+  max-width: 200px;
+}
+
+.empty-slot {
+  background-color: #e0e0e0; /* Different color for empty slots */
+}
+
+.inventory {
+  margin-top: 20px;
+}
+

@@ -5,6 +5,7 @@ import {HomePageComponent} from "./home-page/home-page.component";
 import {CharacterSelectionPageComponent} from "./character-selection-page/character-selection-page.component";
 import {CharacterDashboardComponent} from "./character-dashboard/character-dashboard.component";
 import {CharacterStatsComponent} from "./character-stats/character-stats.component";
+import {CharacterEquipmentComponent} from "./character-equipment/character-equipment.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },  // Route for the login page
@@ -13,6 +14,8 @@ export const routes: Routes = [
   {path: 'character-selection', component: CharacterSelectionPageComponent},
   {path: 'character-dashboard', component: CharacterDashboardComponent},
   {path: 'character-stats', component: CharacterStatsComponent},
+  {path: 'character-equipment', component: CharacterEquipmentComponent},
+
 
 
 

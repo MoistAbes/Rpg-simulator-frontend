@@ -18,6 +18,7 @@ export class CharacterService {
   }
 
   getCharacter(): CharacterModel | null {
+    this.sortItemsByLocation()
     return this.character;
   }
 
@@ -31,5 +32,11 @@ export class CharacterService {
   cleanCharacter(): void {
     this.character = null;
     localStorage.removeItem("character");
+  }
+
+  sortItemsByLocation() {
+    if (this.character?.inventory) {
+      this.character.inventory.sort((a, b) => a.location - b.location);
+    }
   }
 }

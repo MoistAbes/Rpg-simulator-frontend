@@ -1,7 +1,8 @@
 import {ItemModel} from "./items/item.model";
 
-export interface CharacterStorageModel {
+export interface InventoryItemModel {
   id: number| undefined;
   quantity: number;
-  item: ItemModel
+  location: number;
+  item: ItemModel | null;
 }

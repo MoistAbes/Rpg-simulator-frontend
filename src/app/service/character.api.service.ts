@@ -22,4 +22,8 @@ export class CharacterApiService {
     return this.http.get<CharacterModel>(`${this.apiUrl}${API_ENDPOINTS.CHARACTER.CREATE(username ,userId)}`)
   }
 
+  public updateCharacter(character: CharacterModel): Observable<CharacterModel> {
+    return this.http.post<CharacterModel>(`${this.apiUrl}${API_ENDPOINTS.CHARACTER.UPDATE}`, character)
+  }
+
 }

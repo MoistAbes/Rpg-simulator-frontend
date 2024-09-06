@@ -1,6 +1,7 @@
 import {userModel} from "./user.model";
 import {CharacterStatsModel} from "./character-stats.model";
-import {CharacterStorageModel} from "./character-storage-model";
+import {InventoryItemModel} from "./inventory-item-model";
+import {CharacterEquipmentModel} from "./character-equipment-model";
 
 export interface CharacterModel {
   id: number,
@@ -8,7 +9,8 @@ export interface CharacterModel {
   level: number,
   experience: number,
 
-  storage: CharacterStorageModel[];
+  equipment: CharacterEquipmentModel[]
+  inventory: InventoryItemModel[];
   stats: CharacterStatsModel
   user: userModel
 }
