@@ -2,11 +2,25 @@
 
   <h3>Equipment</h3>
   <div class="row">
-    <div class="col-2 mb-3" *ngFor="let slot of character?.equipment">
+    <div class="col-3 col-md-2 col-lg-1 mb-3" *ngFor="let slot of character?.equipment; let i = index">
       <p>{{slot.slot}}</p>
-      <div class="square" (dragover)="onDragOver($event)" (drop)="onDropEquipment($event, slot)">
+      <div class="square"
+           *ngIf="slot.item"
+           (dragover)="onDragOver($event)"
+           (dragstart)="onEquipmentDragStart($event, slot, i)"
+           (drop)="onDropEquipment($event, slot)"
+           draggable="true"
+           (mouseenter)="showEquipmentItemDetails(slot)"
+           (mouseleave)="hideEquipmentItemDetails()"
+      >
+      </div>
+      <div class="square empty-slot" *ngIf="!slot.item"
+           (dragover)="onDragOver($event)"
+           (drop)="onDropEquipment($event, slot)">
+        <!-- Empty slot, no item -->
       </div>
     </div>
+
   </div>
 
   <h1>Inventory</h1>
@@ -18,16 +32,15 @@
            draggable="true"
            (dragstart)="onDragStart($event, slot, i)"
            (dragover)="onDragOver($event)"
-           (drop)="onDrop($event, i)"
+           (drop)="onItemDrop($event, i)"
       >
         <div class="square-content">
-          <p>{{ slot.quantity }}</p>
+          <p *ngIf="slot.quantity">{{ slot.quantity }}</p>
         </div>
       </div>
       <div class="square empty-slot" *ngIf="!slot.item"
            (dragover)="onDragOver($event)"
-           (drop)="onDrop($event, i)">
-
+           (drop)="onItemDrop($event, i)">
         <!-- Empty slot, no item -->
       </div>
     </div>
@@ -41,5 +54,15 @@
     <p *ngIf="hoveredItem?.item?.weapon">Damage: {{ hoveredItem?.item?.weapon?.damage }}</p>
     <p>Rarity: {{ hoveredItem?.item?.rarity }}</p>
     <p>Value: {{ hoveredItem?.item?.value }}</p>
+  </div>
+
+
+  <div class="item-details-external" *ngIf="hoveredEquipmentItem?.item" [ngStyle]="{'top.px': mouseY, 'left.px': mouseX}">
+    <p>Name: {{ hoveredEquipmentItem?.item?.name }}</p>
+    <p>Description: {{ hoveredEquipmentItem?.item?.description }}</p>
+    <p>Type: {{ hoveredEquipmentItem?.item?.type }}</p>
+    <p *ngIf="hoveredEquipmentItem?.item?.weapon">Damage: {{ hoveredEquipmentItem?.item?.weapon?.damage }}</p>
+    <p>Rarity: {{ hoveredEquipmentItem?.item?.rarity }}</p>
+    <p>Value: {{ hoveredEquipmentItem?.item?.value }}</p>
   </div>
 </div>

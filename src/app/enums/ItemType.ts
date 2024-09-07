@@ -1,4 +1,4 @@
 export enum ItemType {
-  WEAPON = "Weapon",
-  ARMOR = "Armor"
+  WEAPON = "WEAPON",
+  ARMOR = "ARMOR"
 }

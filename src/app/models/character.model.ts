@@ -1,6 +1,6 @@
 import {userModel} from "./user.model";
 import {CharacterStatsModel} from "./character-stats.model";
-import {InventoryItemModel} from "./inventory-item-model";
+import {InventoryItemModel} from "./items/inventory-item-model";
 import {CharacterEquipmentModel} from "./character-equipment-model";
 
 export interface CharacterModel {

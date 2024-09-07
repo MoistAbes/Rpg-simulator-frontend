@@ -6,5 +6,5 @@ export interface CharacterEquipmentModel {
   id: number;
   slot: EquipmentSlot;
   character: CharacterModel;
-  item: ItemModel;
+  item: ItemModel | null;
 }

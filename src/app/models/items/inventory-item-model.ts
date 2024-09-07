@@ -1,4 +1,4 @@
-import {ItemModel} from "./items/item.model";
+import {ItemModel} from "./item.model";
 
 export interface InventoryItemModel {
   id: number| undefined;
