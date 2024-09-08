@@ -1,0 +1,10 @@
+.zone-container {
+  display: flex;
+  flex-wrap: wrap; /* This ensures the cards wrap to a new line when necessary */
+  gap: 1rem;       /* Adds space between the cards */
+}
+
+.card {
+  //flex: 1 1 auto;  /* Flex-grow and flex-shrink to allow dynamic resizing, and flex-basis for width */ //this is really cool property
+  flex: 0 0 18rem; /* Prevents growing or shrinking, maintaining a fixed width of 18rem */
+}

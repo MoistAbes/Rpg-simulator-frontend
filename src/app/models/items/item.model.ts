@@ -11,6 +11,7 @@ export interface ItemModel {
   value: number
   rarity: ItemRarity;
   type: ItemType;
+  icon: string;
 
   armor: ArmorModel;
   weapon: WeaponModel;

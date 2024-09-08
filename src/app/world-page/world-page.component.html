@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Zones</h1>
+
+  <div class="zone-container">
+    <div *ngFor="let zone of zoneList" class="card" style="width: 18rem;">
+      <img src="/assets/icons/world/zones/zone.svg" class="card-img-top" alt="zone name">
+
+      <div class="card-body">
+        <h5 class="card-title">{{zone.name}}</h5>
+        <p class="card-text">{{zone.description}}</p>
+        <button class="btn btn-primary">Enter zone</button>
+      </div>
+    </div>
+  </div>
+</div>

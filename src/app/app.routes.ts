@@ -6,6 +6,7 @@ import {CharacterSelectionPageComponent} from "./character-selection-page/charac
 import {CharacterDashboardComponent} from "./character-dashboard/character-dashboard.component";
 import {CharacterStatsComponent} from "./character-stats/character-stats.component";
 import {CharacterEquipmentComponent} from "./character-equipment/character-equipment.component";
+import {WorldPageComponent} from "./world-page/world-page.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },  // Route for the login page
@@ -15,6 +16,8 @@ export const routes: Routes = [
   {path: 'character-dashboard', component: CharacterDashboardComponent},
   {path: 'character-stats', component: CharacterStatsComponent},
   {path: 'character-equipment', component: CharacterEquipmentComponent},
+  {path: 'world', component: WorldPageComponent},
+
 
 
 

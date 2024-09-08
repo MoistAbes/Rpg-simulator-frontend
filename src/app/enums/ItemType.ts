@@ -1,4 +1,9 @@
 export enum ItemType {
   WEAPON = "WEAPON",
-  ARMOR = "ARMOR"
+  SHIELD = "SHIELD",
+  TORSO = "TORSO",
+  HANDS = "HANDS",
+  HEAD = "HEAD",
+  LEGS = "LEGS",
+  FEET = "FEET"
 }
