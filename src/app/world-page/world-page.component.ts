@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {ZoneApiService} from "../service/zone.api.service";
 import {ZoneModel} from "../models/zone.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-world-page',
@@ -17,7 +18,8 @@ export class WorldPageComponent implements OnInit{
 
   zoneList: ZoneModel[] = []
 
-  constructor(private zoneApiService: ZoneApiService) {
+  constructor(private zoneApiService: ZoneApiService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,8 +43,6 @@ export class WorldPageComponent implements OnInit{
   }
 
 
-
-
-
-
+  enterZone(zone: ZoneModel) {
+    this.router.navigate(["world/zone"], { state: { zone } });  }
 }

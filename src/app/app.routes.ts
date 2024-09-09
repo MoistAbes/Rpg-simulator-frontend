@@ -7,6 +7,7 @@ import {CharacterDashboardComponent} from "./character-dashboard/character-dashb
 import {CharacterStatsComponent} from "./character-stats/character-stats.component";
 import {CharacterEquipmentComponent} from "./character-equipment/character-equipment.component";
 import {WorldPageComponent} from "./world-page/world-page.component";
+import {ZonePageComponent} from "./zone-page/zone-page.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },  // Route for the login page
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path: 'character-stats', component: CharacterStatsComponent},
   {path: 'character-equipment', component: CharacterEquipmentComponent},
   {path: 'world', component: WorldPageComponent},
+  {path: 'world/zone', component: ZonePageComponent},
 
 
 

@@ -1,0 +1,34 @@
+<div class="container">
+
+  <h1>Zone: {{zone!.name}}</h1>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{character?.name}}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Attack: {{character!.stats.attack}}</li>
+      <li class="list-group-item">Defense: {{character!.stats.defense}}</li>
+    </ul>
+    <div class="card-body">
+      <p>Level: {{character!.level}}</p>
+      <p>Experience: {{character!.experience}}</p>
+
+      <div class="card-body">
+        <h6>Health: {{character!.stats.currentHealth}} / {{character!.stats.maxHealth}}</h6>
+        <div class="progress" style="height: 20px;">
+          <div
+            class="progress-bar bg-danger"
+            role="progressbar"
+            [style.width]="getHealthPercentage(character!.stats.currentHealth, character!.stats.maxHealth) + '%'"
+            [attr.aria-valuenow]="character!.stats.currentHealth"
+            [attr.aria-valuemin]="0"
+            [attr.aria-valuemax]="character!.stats.maxHealth">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

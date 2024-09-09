@@ -39,4 +39,12 @@ export class CharacterService {
       this.character.inventory.sort((a, b) => a.location - b.location);
     }
   }
+
+  // Function to calculate health percentage
+  getHealthPercentage(health: number, maxHealth: number): number {
+    if (!health || !maxHealth) {
+      return 0;
+    }
+    return (health / maxHealth) * 100;
+  }
 }
