@@ -1,55 +1,268 @@
-<div class="container inventory" (mousemove)="onMouseMove($event)">
-
-  <h3>Equipment</h3>
+<div class="container-fluid" style="width: 100%">
+  <!-- First Row -->
   <div class="row">
-    <div class="col-3 col-md-2 col-lg-1 mb-3" *ngFor="let slot of character?.equipment; let i = index">
-      <p>{{slot.slot}}</p>
-      <div class="square"
-           *ngIf="slot.item"
-           (dragover)="onDragOver($event)"
-           (dragstart)="onEquipmentDragStart($event, slot, i)"
-           (drop)="onDropEquipment($event, slot, i)"
-           draggable="true"
-           (mouseenter)="showEquipmentItemDetails(slot)"
-           (mouseleave)="hideEquipmentItemDetails()">
+    <!-- First div: 50% width, 70% height -->
+    <div class="col-6" style="height: 70vh; background-color: lightblue;">
+      <!-- Your content here -->
+      <!-- Your equipment slots go here as you have already structured them -->
+      <h1>Equipment</h1>
+      <!--    row 1-->
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          <p>{{character!.equipment[0].slot}}</p>
 
-        <div class="square-content">
-          <img ngSrc="{{slot.item.icon}}" alt="{{ slot.item.name }}" class="item-icon" fill>
+          <div class="square"
+               *ngIf="character!.equipment[0].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[0], 0)"
+               (drop)="onDropEquipment($event, character!.equipment[0], 0)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[0])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[0].item!.icon}}" alt="{{ character!.equipment[0].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[0].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[0], 0)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+
+      <!--    row 2-->
+      <div class="row">
+        <div class="col">
+
+          <p>{{character!.equipment[2].slot}}</p>
+
+          <div class="square"
+               *ngIf="character!.equipment[2].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[2], 2)"
+               (drop)="onDropEquipment($event, character!.equipment[2], 2)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[2])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[2].item!.icon}}" alt="{{ character!.equipment[2].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[2].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[2], 2)">
+            <!-- Empty slot, no item -->
+          </div>      </div>
+        <div class="col">
+          <p>{{character!.equipment[1].slot}}</p>
+
+          <div class="square"
+               *ngIf="character!.equipment[1].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[1], 1)"
+               (drop)="onDropEquipment($event, character!.equipment[1], 1)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[1])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[1].item!.icon}}" alt="{{ character!.equipment[1].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[1].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[1], 1)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+        <div class="col">
 
         </div>
       </div>
-      <div class="square empty-slot" *ngIf="!slot.item"
-           (dragover)="onDragOver($event)"
-           (drop)="onDropEquipment($event, slot, i)">
-        <!-- Empty slot, no item -->
-      </div>
-    </div>
 
-  </div>
+      <!--    row 3-->
+      <div class="row">
+        <div class="col">
 
- <h1>Inventory</h1>
-  <div class="row">
-    <div *ngFor="let inventoryItem of character?.inventory; let i = index" class="col-3 col-md-2 col-lg-1 mb-3">
-      <div class="square" *ngIf="inventoryItem.item"
-           (mouseenter)="showDetails(inventoryItem)"
-           (mouseleave)="hideDetails()"
-           draggable="true"
-           (dragstart)="onItemDragStart($event, inventoryItem, i)"
-           (dragover)="onDragOver($event)"
-           (drop)="onItemDrop($event, i)"
-      >
-        <div class="square-content">
-          <img ngSrc="{{inventoryItem.item.icon}}" alt="{{ inventoryItem.item.name }}" class="item-icon" fill>
-          <p *ngIf="inventoryItem.quantity">{{ inventoryItem.quantity }}</p>
+        </div>
+        <div class="col">
+          <p>{{character!.equipment[3].slot}}</p>
+
+          <div class="square"
+               *ngIf="character!.equipment[3].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[3], 3)"
+               (drop)="onDropEquipment($event, character!.equipment[3], 3)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[3])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[3].item!.icon}}" alt="{{ character!.equipment[3].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[3].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[3], 3)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+        <div class="col">
+
         </div>
       </div>
-      <div class="square empty-slot" *ngIf="!inventoryItem.item"
-           (dragover)="onDragOver($event)"
-           (drop)="onItemDrop($event, i)">
-        <!-- Empty slot, no item -->
+
+      <!--    row 4-->
+      <div class="row">
+        <div class="col">
+
+          <p>{{character!.equipment[5].slot}}</p>
+
+          <div class="square"
+               *ngIf="character!.equipment[5].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[5], 5)"
+               (drop)="onDropEquipment($event, character!.equipment[5], 5)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[5])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[5].item!.icon}}" alt="{{ character!.equipment[5].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[5].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[5], 5)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+        <div class="col">
+          <p>{{character!.equipment[4].slot}}</p>
+
+          <div class="square"
+               *ngIf="character!.equipment[4].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[4], 4)"
+               (drop)="onDropEquipment($event, character!.equipment[4], 4)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[4])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[4].item!.icon}}" alt="{{ character!.equipment[4].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[4].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[4], 4)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+        <div class="col">
+          <p>{{character!.equipment[6].slot}}</p>
+
+          <div class="square"
+               *ngIf="character!.equipment[6].item"
+               (dragover)="onDragOver($event)"
+               (dragstart)="onEquipmentDragStart($event, character!.equipment[6], 6)"
+               (drop)="onDropEquipment($event, character!.equipment[6], 6)"
+               draggable="true"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[6])"
+               (mouseleave)="hideEquipmentItemDetails()">
+
+            <div class="square-content">
+              <img ngSrc="{{character!.equipment[6].item!.icon}}" alt="{{ character!.equipment[6].item!.name }}" class="item-icon" fill>
+
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!character!.equipment[5].item"
+               (dragover)="onDragOver($event)"
+               (drop)="onDropEquipment($event, character!.equipment[5], 5)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Second div: 50% width, 70% height -->
+    <div class="col-6" style="height: 70vh; background-color: lightgreen;">
+      <!-- Your content here -->
+
+      <h1 class="text-center">Stats</h1>
+      <div class="card">
+        <div class="card-header text-center">
+          <h2>{{ character!.name }}</h2>
+          <h5>Level: {{ character!.level }}</h5>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Experience: {{ character!.experience }}</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Statistics:</h6>
+              <ul class="list-group">
+                <li class="list-group-item">Attack: {{ character!.stats.attack }}</li>
+                <li class="list-group-item">Defense: {{ character!.stats.defense }}</li>
+                <li class="list-group-item">Health: {{ character!.stats.maxHealth }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Second Row -->
+  <div class="row">
+    <!-- Third div: 100% width, 30% height -->
+    <div class="col-12" style="margin-top: 10px; height: 30vh; background-color: lightcoral;">
+
+      <!-- Your content here -->
+      <h1>Inventory</h1>
+      <div class="row">
+        <div *ngFor="let inventoryItem of character?.inventory; let i = index" class="col-3 col-md-2 col-lg-1 mb-3">
+          <div class="square" *ngIf="inventoryItem.item"
+               (mouseenter)="showDetails(inventoryItem)"
+               (mouseleave)="hideDetails()"
+               draggable="true"
+               (dragstart)="onItemDragStart($event, inventoryItem, i)"
+               (dragover)="onDragOver($event)"
+               (drop)="onItemDrop($event, i)"
+          >
+            <div class="square-content">
+              <img ngSrc="{{inventoryItem.item.icon}}" alt="{{ inventoryItem.item.name }}" class="item-icon" fill>
+              <p *ngIf="inventoryItem.quantity">{{ inventoryItem.quantity }}</p>
+            </div>
+          </div>
+          <div class="square empty-slot" *ngIf="!inventoryItem.item"
+               (dragover)="onDragOver($event)"
+               (drop)="onItemDrop($event, i)">
+            <!-- Empty slot, no item -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
   <!-- External div for displaying item details -->
   <div class="item-details-external" *ngIf="hoveredItem?.item" [ngStyle]="{'top.px': mouseY, 'left.px': mouseX}">
@@ -72,4 +285,4 @@
     <p>Rarity: {{ hoveredEquipmentItem?.item?.rarity }}</p>
     <p>Value: {{ hoveredEquipmentItem?.item?.value }}</p>
   </div>
-</div>
+
