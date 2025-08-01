@@ -29,6 +29,7 @@ export class CharacterEquipmentComponent implements OnInit{
 
   // Store the index of the item being dragged
   draggedIndex: number | null = null;
+  isDragging: boolean = false;
 
   character: CharacterModel | null | undefined;
 
@@ -43,11 +44,14 @@ export class CharacterEquipmentComponent implements OnInit{
   }
 
   // Triggered when hovering over an item
-  showDetails(inventoryItem: InventoryItemModel) {
+  showDetails(inventoryItem: InventoryItemModel, event: any) {
+    console.log("is dragging: ", this.isDragging)
+    this.onMouseMove(event)
     this.hoveredItem = inventoryItem; // Set the hovered item details
   }
 
-  showEquipmentItemDetails(equipmentItem: CharacterEquipmentModel){
+  showEquipmentItemDetails(equipmentItem: CharacterEquipmentModel, event: any){
+    this.onMouseMove(event);
     this.hoveredEquipmentItem = equipmentItem;
   }
 
@@ -63,20 +67,25 @@ export class CharacterEquipmentComponent implements OnInit{
   // Update mouse coordinates dynamically
   onMouseMove(event: MouseEvent) {
     this.mouseX = event.clientX + 15; // Add 15px to the right of the cursor
-    this.mouseY = event.clientY + 15; // Add 15px below the cursor
+    this.mouseY = event.clientY - 50; // Add 15px below the cursor
   }
 
 
   //drag methods
   onItemDragStart(event: DragEvent, item: InventoryItemModel, index: number) {
+    this.isDragging = true;
+
     this.draggedIndex = index; // Store the index of the item being dragged
     event.dataTransfer?.setData('text/plain', JSON.stringify(item)); // Store item data
     console.log("On item drag start")
+    console.log("is dragging: ", this.isDragging)
     // console.log("dragged index: ", this.draggedIndex)
     // console.log("dragged item: ", item)
 
   }
   onItemDrop(event: DragEvent, index: number) {
+    this.isDragging = false;
+
     event.preventDefault();
     if (this.draggedIndex !== null) {
       const itemData: string | undefined = event.dataTransfer?.getData('text/plain')
@@ -96,13 +105,12 @@ export class CharacterEquipmentComponent implements OnInit{
         const inventoryItem: InventoryItemModel = droppedItem;
 
         // Move the item to the new position
-          let itemCopy: InventoryItemModel = this.character!.inventory[index];
-
-          this.character!.inventory[index] = inventoryItem; // Place item in new spot
-        const tempLocation = this.character!.inventory[index].location
-        this.character!.inventory[index].location = itemCopy.location
-          this.character!.inventory[this.draggedIndex] = itemCopy;
-        this.character!.inventory[this.draggedIndex].location = tempLocation
+        let itemCopy: InventoryItemModel = this.character!.inventory[index];
+        this.character!.inventory[index] = inventoryItem; // Place item in new spot
+        const tempLocation = this.character!.inventory[index].location;
+        this.character!.inventory[index].location = itemCopy.location;
+        this.character!.inventory[this.draggedIndex] = itemCopy;
+        this.character!.inventory[this.draggedIndex].location = tempLocation;
 
       }
 
@@ -112,6 +120,9 @@ export class CharacterEquipmentComponent implements OnInit{
   }
 
   onEquipmentDragStart(event: DragEvent, item: CharacterEquipmentModel, index: number) {
+    this.isDragging = true;
+
+
     this.draggedIndex = index; // Store the index of the item being dragged
     event.dataTransfer?.setData('text/plain', JSON.stringify(item)); // Store item data
     console.log("On equipment drag start")
@@ -122,6 +133,8 @@ export class CharacterEquipmentComponent implements OnInit{
 
   onDropEquipment(event: DragEvent, equipmentSlot: CharacterEquipmentModel, dropIndex: number) {
     console.log("on equipment drop")
+    this.isDragging = false;
+
     event.preventDefault();
     if (this.draggedIndex !== null) {
       const itemData = event.dataTransfer?.getData('text/plain');

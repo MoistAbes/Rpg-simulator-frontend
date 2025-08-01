@@ -19,7 +19,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[0], 0)"
                (drop)="onDropEquipment($event, character!.equipment[0], 0)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[0])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[0], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -49,7 +49,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[2], 2)"
                (drop)="onDropEquipment($event, character!.equipment[2], 2)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[2])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[2], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -71,7 +71,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[1], 1)"
                (drop)="onDropEquipment($event, character!.equipment[1], 1)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[1])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[1], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -104,7 +104,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[3], 3)"
                (drop)="onDropEquipment($event, character!.equipment[3], 3)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[3])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[3], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -135,7 +135,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[5], 5)"
                (drop)="onDropEquipment($event, character!.equipment[5], 5)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[5])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[5], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -158,7 +158,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[4], 4)"
                (drop)="onDropEquipment($event, character!.equipment[4], 4)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[4])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[4], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -181,7 +181,7 @@
                (dragstart)="onEquipmentDragStart($event, character!.equipment[6], 6)"
                (drop)="onDropEquipment($event, character!.equipment[6], 6)"
                draggable="true"
-               (mouseenter)="showEquipmentItemDetails(character!.equipment[6])"
+               (mouseenter)="showEquipmentItemDetails(character!.equipment[6], $event)"
                (mouseleave)="hideEquipmentItemDetails()">
 
             <div class="square-content">
@@ -189,9 +189,9 @@
 
             </div>
           </div>
-          <div class="square empty-slot" *ngIf="!character!.equipment[5].item"
+          <div class="square empty-slot" *ngIf="!character!.equipment[6].item"
                (dragover)="onDragOver($event)"
-               (drop)="onDropEquipment($event, character!.equipment[5], 5)">
+               (drop)="onDropEquipment($event, character!.equipment[6], 6)">
             <!-- Empty slot, no item -->
           </div>
         </div>
@@ -236,7 +236,7 @@
       <div class="row">
         <div *ngFor="let inventoryItem of character?.inventory; let i = index" class="col-3 col-md-2 col-lg-1 mb-3">
           <div class="square" *ngIf="inventoryItem.item"
-               (mouseenter)="showDetails(inventoryItem)"
+               (mouseenter)="showDetails(inventoryItem, $event)"
                (mouseleave)="hideDetails()"
                draggable="true"
                (dragstart)="onItemDragStart($event, inventoryItem, i)"
@@ -265,7 +265,7 @@
 
 
   <!-- External div for displaying item details -->
-  <div class="item-details-external" *ngIf="hoveredItem?.item" [ngStyle]="{'top.px': mouseY, 'left.px': mouseX}">
+  <div class="item-details-external" *ngIf="hoveredItem?.item && !isDragging" [ngStyle]="{'top.px': mouseY, 'left.px': mouseX}">
     <p>Name: {{ hoveredItem?.item?.name }}</p>
     <p>Description: {{ hoveredItem?.item?.description }}</p>
     <p>Type: {{ hoveredItem?.item?.type }}</p>
@@ -276,7 +276,7 @@
   </div>
 
 
-  <div class="item-details-external" *ngIf="hoveredEquipmentItem?.item" [ngStyle]="{'top.px': mouseY, 'left.px': mouseX}">
+  <div class="item-details-external" *ngIf="hoveredEquipmentItem?.item && !isDragging" [ngStyle]="{'top.px': mouseY, 'left.px': mouseX}">
     <p>Name: {{ hoveredEquipmentItem?.item?.name }}</p>
     <p>Description: {{ hoveredEquipmentItem?.item?.description }}</p>
     <p>Type: {{ hoveredEquipmentItem?.item?.type }}</p>

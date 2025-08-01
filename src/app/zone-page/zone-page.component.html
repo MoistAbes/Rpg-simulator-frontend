@@ -1,34 +1,113 @@
 <div class="container">
 
-  <h1>Zone: {{zone!.name}}</h1>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{character?.name}}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Attack: {{character!.stats.attack}}</li>
-      <li class="list-group-item">Defense: {{character!.stats.defense}}</li>
-    </ul>
-    <div class="card-body">
-      <p>Level: {{character!.level}}</p>
-      <p>Experience: {{character!.experience}}</p>
+  <h1 style="text-align: center; margin-bottom: 50px">Zone: {{zone!.name}}</h1>
 
-      <div class="card-body">
-        <h6>Health: {{character!.stats.currentHealth}} / {{character!.stats.maxHealth}}</h6>
-        <div class="progress" style="height: 20px;">
-          <div
-            class="progress-bar bg-danger"
-            role="progressbar"
-            [style.width]="getHealthPercentage(character!.stats.currentHealth, character!.stats.maxHealth) + '%'"
-            [attr.aria-valuenow]="character!.stats.currentHealth"
-            [attr.aria-valuemin]="0"
-            [attr.aria-valuemax]="character!.stats.maxHealth">
+
+  <div class="row">
+    <!--  CHARACTER CARD-->
+    <div class="col-2">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{character?.name}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Attack: {{character!.stats.attack}}</li>
+          <li class="list-group-item">Defense: {{character!.stats.defense}}</li>
+        </ul>
+        <div class="card-body">
+          <p>Level: {{character!.level}}</p>
+          <p>Experience: {{character!.experience}}</p>
+
+          <div class="card-body">
+            <h6>Health: {{character!.stats.currentHealth}} / {{character!.stats.maxHealth}}</h6>
+            <div class="progress" style="height: 20px;">
+              <div
+                class="progress-bar bg-danger"
+                role="progressbar"
+                [style.width]="getHealthPercentage(character!.stats.currentHealth, character!.stats.maxHealth) + '%'"
+                [attr.aria-valuenow]="character!.stats.currentHealth"
+                [attr.aria-valuemin]="0"
+                [attr.aria-valuemax]="character!.stats.maxHealth">
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-8"></div>
+<!--    ENEMY CARD-->
+    <div class="col-2">
+      <div *ngIf="combatInstance" class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{combatInstance.enemyInstance!.enemy.name}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Attack: {{combatInstance.enemyInstance!.currentAttack}}</li>
+          <li class="list-group-item">Defense: {{combatInstance.enemyInstance!.currentDefense}}</li>
+        </ul>
+        <div class="card-body">
 
+          <div class="card-body">
+            <h6>Health: {{combatInstance.enemyInstance!.currentHealth}} / {{combatInstance.enemyInstance!.enemy.stats.health}}</h6>
+            <div class="progress" style="height: 20px;">
+              <div
+                class="progress-bar bg-danger"
+                role="progressbar"
+                [style.width]="getHealthPercentage(combatInstance.enemyInstance!.currentHealth, combatInstance.enemyInstance!.enemy.stats.health) + '%'"
+                [attr.aria-valuenow]="combatInstance.enemyInstance!.currentHealth"
+                [attr.aria-valuemin]="0"
+                [attr.aria-valuemax]="combatInstance.enemyInstance!.enemy.stats.health">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="row">
 
-</div>
+    <div class="col-12">
+      <button *ngIf="!isStartClicked" (click)="onStartClicked()" style="width: 100%" class="btn btn-success">START</button>
+      <button *ngIf="isStartClicked" (click)="onStopClicked()" style="width: 100%" class="btn btn-danger">STOP</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+
+    <div class="col-6">
+      <h3 style="text-align: center;">Enemy list</h3>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Attack</th>
+          <th scope="col">Health</th>
+          <th scope="col">Defense</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let enemy of zone?.enemyList; let i = index">
+          <th scope="row">{{ i + 1 }}</th> <!-- Displays index starting from 1 -->
+          <td>{{enemy.name}}</td>
+          <td>{{enemy.stats.attack}}</td>
+          <td>{{enemy.stats.health}}</td>
+          <td>{{enemy.stats.defense}}</td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+
+  </div>

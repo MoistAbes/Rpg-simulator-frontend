@@ -76,6 +76,7 @@ export class CharacterSelectionPageComponent implements OnInit{
       },
       complete: () => {
         console.log("Succesfully created new character");
+        //create character instance
       }
     })
   }

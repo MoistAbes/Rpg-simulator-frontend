@@ -31,14 +31,17 @@
 /* External item details div */
 .item-details-external {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(112, 112, 112);
   color: white;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   z-index: 1000; /* Ensures it's always above other elements */
   pointer-events: none; /* Prevents it from interfering with mouse events */
   max-width: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2); /* Adds a nice shadow effect */
 }
+
 
 .empty-slot {
   background-color: #e0e0e0; /* Different color for empty slots */
